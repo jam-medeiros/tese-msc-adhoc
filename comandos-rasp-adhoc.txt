@@ -1,0 +1,67 @@
+1- Isso envolve modificações no arquivo de configuração de rede, 
+
+/etc/network/interfaces portanto você deve primeiro fazer um backup, por exemplo sudo cp /etc/network/interfaces /etc/network/interfaces.orig.
+
+2- com o cmano  sudo  nano /etc/network/interfaces
+
+Substitua o interfacesarquivo pelo seguinte: -
+
+# interfaces(5) file used by ifup(8) and ifdown(8)
+
+# Please note that this file is written to be used with dhcpcd
+# For static IP, consult /etc/dhcpcd.conf and 'man dhcpcd.conf'
+
+# Include files from /etc/network/interfaces.d:
+source-directory /etc/network/interfaces.d
+
+auto lo
+iface lo inet loopback
+
+iface eth0 inet dhcp
+
+auto wlan0
+iface wlan0 inet static
+  address 10.2.1.1
+  netmask 255.255.255.0
+  wireless-channel 1
+  wireless-essid PiAdHocNetwork
+  wireless-mode ad-hoc
+
+3- Você pode escolher seu próprio endereço, SSID e canal sem fio, mas todas as máquinas devem ter as mesmas configurações.
+
+4- depois de re inicia a maquina  de os seguintes comandos
+
+sudo ifdown wlan0
+sudo ifup wlan0
+
+// para a vm nao usar wlan 0 usar o comando  
+sudo ifconfig enp0s3 down
+sudo ifconfig enp0s3 up
+
+
+5-  de um scan na rede adhoc com o seguinte comando
+
+iwlist wlan0 scan
+
+deve ter uma saida assim:
+
+can completed :
+          Cell 01 - Address: 02:0F:B5:4F:74:ED
+                    ESSID:"MYNETWORK"
+                    Mode:Ad-Hoc
+                    Frequency:2.412 GHz (Channel 1)
+                    Quality=42/70  Signal level=-53 dBm  Noise level=-95 dBm
+                    Encryption key:off
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 6 Mb/s
+                              9 Mb/s; 12 Mb/s; 18 Mb/s; 24 Mb/s; 36 Mb/s
+                              48 Mb/s; 54 Mb/s
+                    Extra:bcn_int=100
+
+links de apoio
+
+
+https://wiki.debian.org/WiFi/AdHoc
+
+https://www.devmedia.com.br/configurar-rede-linux-via-terminal-linha-de-comando/21902
+
+https://qastack.com.br/raspberrypi/49660/ad-hoc-setup-in-rpi-3

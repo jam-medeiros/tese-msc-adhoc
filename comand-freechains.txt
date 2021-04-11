@@ -1,0 +1,163 @@
+
+
+
+o cenário adotado para o exeperimento foi o abaixo:
+
+Para este exeperimento fora criado duas redes adhoc distintas sob o intuito de realizar a comunicação utilizando o freechains de ponta a ponta. Abaixo é apresentado um tutorial com os passos necessários para implementção do mesmo.
+
+mateial necessário :
+
+2 Raspberry PI B3
+1 Host linux
+1 Interface de rede USB/WIFI
+
+1° parte: Instalando o freechains 
+ 
+Passos:
+
+1- instalar JRE
+
+sudo apt install default-jre libsodium23
+
+2-Clonar repositorio
+
+wget https://github.com/Freechains/README/releases/download/v0.7.9/install-v0.7.9.sh
+
+3- instalar o freechains  
+
+sudo sh install-v0.7.9.sh /usr/local/bin
+
+4- startar o freechains
+
+sudo freechains-host start /home/pi/laranja
+
+5 - criando a cadeia -(como o cenário possui 3 nós é necessário criar as cadeias de forma equalitária em todos os nós, uma vez que o freechains parte do principio LFS)
+
+sudo freechains chains join "#chat"
+
+6-gerando as chaves públicas e privadas.. 
+
+sudo freechains crypto pubpvt "My very strong passphrase"  # returns public private keys
+hash 
+
+B30C5291E805F6182FE524D4590850DFEAC7FF86078A17AAD0CE94A44D214299
+
+chaves
+EB172ED6C782145B8D4FD043252206192C302E164C0BD16D49EB9D36D5188070 
+96700ACD1128035FFEF5DC264DF87D5FEE45FF15E2A880708AE40675C9AD039EEB172ED6C782145B8D4FD043252206192C302E164C0BD16D49EB9D36D5188070
+
+
+
+Até aqui os passos devem ser realizados nos tres nós.. 
+
+é ineterssante pingar os nós pelo freechains
+
+
+sudo freechains peer IP do nó:8330 ping
+
+
+
+#########################################
+2º parte crinado interfaces ad hoc
+
+Se tudo estiver ok ate aqui é necessário agora configurar os tres nós em modo ADHoc
+
+para isso é necessário configurar o arquivo de configuração de rede dos nós:
+
+1- Isso envolve modificações no arquivo de configuração de rede, 
+
+/etc/network/interfaces portanto você deve primeiro fazer um backup, por exemplo sudo cp /etc/network/interfaces /etc/network/interfaces.orig.
+
+2- com comando sudo  nano /etc/network/interfaces
+
+Substitua o interfacesarquivo pelo seguinte: -
+
+# interfaces(5) file used by ifup(8) and ifdown(8)
+
+# Please note that this file is written to be used with dhcpcd
+# For static IP, consult /etc/dhcpcd.conf and 'man dhcpcd.conf'
+
+# Include files from /etc/network/interfaces.d:
+source-directory /etc/network/interfaces.d
+
+auto lo
+iface lo inet loopback
+
+iface eth0 inet dhcp
+
+auto wlan0
+iface wlan0 inet static
+  address 10.2.1.1
+  netmask 255.255.255.0
+  wireless-channel 1
+  wireless-essid PiAdHocNetwork
+  wireless-mode ad-hoc
+
+3- Você pode escolher seu próprio endereço, SSID e canal sem fio, mas todas as máquinas devem ter as mesmas configurações pára pertencerem a mesma rede. 
+(nesse caso foi necessário criar duas redes distintas)
+
+Rede 1 rede-adhoc
+Rede 2 adhocII
+
+4- depois de reiniciar as maquinas de os seguintes comandos
+
+
+5-  de um scan na rede adhoc com o seguinte comando
+
+iwlist wlan0 scan
+
+deve ter uma saída semelhante a esta:
+
+can completed :
+          Cell 01 - Address: 02:0F:B5:4F:74:ED
+                    ESSID:"MYNETWORK"
+                    Mode:Ad-Hoc
+                    Frequency:2.412 GHz (Channel 1)
+                    Quality=42/70  Signal level=-53 dBm  Noise level=-95 dBm
+                    Encryption key:off
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 6 Mb/s
+                              9 Mb/s; 12 Mb/s; 18 Mb/s; 24 Mb/s; 36 Mb/s
+                              48 Mb/s; 54 Mb/s
+                    Extra:bcn_int=100
+
+links de apoio
+
+
+https://wiki.debian.org/WiFi/AdHoc
+
+https://www.devmedia.com.br/configurar-rede-linux-via-terminal-linha-de-comando/21902
+
+https://qastack.com.br/raspberrypi/49660/ad-hoc-setup-in-rpi-3
+
+#########################################
+3º parte: Estabelecendo comunicação em modo adhoc
+
+Como o experimento consiste em enviar uma mensagem do nó (Raspberry 1 - IP 10.2.1.3) passando pelo host intermediário (Host Linux IP 10.2.1.2 e 192.168.1.104)com destino final o (Raspberry 2 - IP 192.168.1.105)
+obs: todos os Peers usaram a porta 8330
+
+7- enviando mensagensm (Raspberry 1 - IP 10.2.1.3)
+
+sudo freechains chain "#chat" post inline "Hello World!" --sign=
+
+8- Sincronizando o peer (Raspberry 1 - IP 10.2.1.3 com o Peer 2 -IP 10.2.1.2)
+
+Aqui ẽ possivel ver o conteudo da mensagem enviada pelo peer 1,
+para isso ẽ necessãrio pegar o bloco genesis, posteriormente o id da mensagem  e dar (get payload) 
+
+9- Sincronizando o peer (Peer 2(Host linux) 10.2.1.2 com Peer 3(Raspberry 2) -IP 192.168.1.105)
+
+sudo freechains --host=localhost:8330 peer 192.168.1.105:8330 send "#chat"
+
+10 pegando bloco genesis no (Peer 2-IP 192.168.1.105)
+
+sudo freechains --host=localhost:8330 chain "#chat" genesis
+ 
+sudo freechains --host=localhost:8330 chain "#chat" get block
+
+11 pegando o payload da mensagem no (peer 3-IP 192.168.1.105 )
+
+
+sudo freechains chain "#chat" get payload 1_EEE3063BD3C3A80B736EDD368BC0F31C34D0CD86A546E94E4BA731939E4C3F81
+
+
+
