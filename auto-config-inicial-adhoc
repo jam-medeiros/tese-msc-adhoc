@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# criando a função rede ad hoc
+
+createAdHocNetwork(){
+    echo "Criando sua rede AD Hoc...."
+    ifconfig wlan0 down
+    iwconfig wlan0 mode ad-hoc
+    iwconfig wlan0 essid ad-jam
+    ifconfig wlan0 11.0.0.1 netmask 255.255.255.0 up
+    echo " Rede Ad Hoc criada com sucesso...."
+}
+
+
+# função de conexão wifi
+
+connect(){
+    echo "Tentando configurar  a rede wireless"
+    ifdown wlan0
+    wpa_supplicant -B -i wlan0 -c /home/pi/pics/wpa_supplicant.conf
+    ifup wlan0
+    echo "Wifi configurado"
+}
+
+echo "================================="
+echo "Wifi setup"
+echo "================================="
+connect
+echo "Checando conectividade..."
+sleep 5s
+ping -c 5 -I wlan0 google.com > /dev/null 2>&1
+PINGSTATUS=$?
+echo "Status"
+echo $PINGSTATUS
+if [ $PINGSTATUS -eq 0 ];
+    then
+        echo "Connected ao WiFi"
+    else
+        echo "Wifi não conectado, retrone para a rede ad-hoc"
+        createAdHocNetwork
+fi
+
+exit 0
