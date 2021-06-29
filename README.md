@@ -1,6 +1,5 @@
 # tese-msc-adhoc
-repositório destinado aos experimentos realizados na pesquisa da tese de mestrado sem redes sem fio AD Hoc
-tese-msc-adhoc
+
 Repositório destinado aos experimentos realizados na pesquisa da tese de mestrado sem redes sem fio AD Hoc
 
 tutorial rapido crição rede MESH com batman 1 criação rede mesh
@@ -27,13 +26,17 @@ ssh pi@hostname.local
 
 3º Executar comando para gerenciar uma rede mesh, um usuário chamado batctl precisa ser instalado. Isso pode ser feito usando o comando:
 
-sudo apt-get install -y batctl
+sudo apt-get install libnl-genl-3-dev
+sudo apt install -y git
+sudo git clone https://github.com/open-mesh-mirror/batctl
+cd batctl
+sudo make install
 
-Usando seu editor preferido, crie um arquivo ~ / start-batman-adv.sh
+Crie um arquivo ~ / start-batman-adv.sh
 
 por exemplo
 
-vi ~ / start-batman-adv.sh nano ~ / start-batman-adv.sh o arquivo deve conter o seguinte:
+nano ~ / start-batman-adv.sh nano ~ / start-batman-adv.sh o arquivo deve conter o seguinte:
 
 #! / bin / bash
 
@@ -46,9 +49,12 @@ cliente sudo batctl gw_mode
 Ativa interfaces batman-adv
 sudo ifconfig wlan0 up sudo ifconfig bat0 up
 
+
 5º Torne o arquivo start-batman-adv.sh executável com o comando:
 
+
 chmod + x ~ / start-batman-adv.sh
+
 
 6º Crie a definição da interface de rede para uma interface wlan0 criando um arquivo como usuário root, por exemplo
 
@@ -57,6 +63,7 @@ sudo vi /etc/network/interfaces.d/wlan0 sudo nano /etc/network/interfaces.d/wlan
 auto wlan0 iface wlan0 inet manual wireless-channel 1 wireless-essid nome-rede-mesh modo wireless ad-hoc
 
 OBS ::: Esses valores devem ser os mesmos em TODOS os dispositivos que formarão sua rede mesh.
+
 
 7º certifique-se de que o módulo do kernel batman-adv seja carregado no momento da inicialização, emitindo o seguinte comando:
 
@@ -73,5 +80,8 @@ sudo nano /etc/rc.local
 e insira:
 
 /home/pi/start-batman-adv.sh & antes da última linha: saída 0
+
+
+
 
 3-configuração de gateway
