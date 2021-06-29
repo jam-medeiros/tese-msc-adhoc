@@ -93,5 +93,5 @@ antes da última linha: saída 0
 
     
     
-
+ 
 3-configuração de gateway
