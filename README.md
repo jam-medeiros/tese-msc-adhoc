@@ -13,7 +13,7 @@ Neste tutorial são usados ​​pi de raspberry para simulação e para constru
 
 2- configurção padrão da malha nó
 
-1 ° atualize o nó
+# 1° Atualize o nó
 
 sudo apt-get update && sudo apt-get upgrade -y
 
