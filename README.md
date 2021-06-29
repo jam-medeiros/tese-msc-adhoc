@@ -83,9 +83,8 @@ echo 'denyinterfaces wlan0' | sudo tee --append /etc/dhcpcd.conf
 
 sudo nano /etc/rc.local
 
-e insira:
+e insira:   
     
-    e insira:
 
 /home/pi/start-batman-adv.sh &
 antes da última linha: saída 0
