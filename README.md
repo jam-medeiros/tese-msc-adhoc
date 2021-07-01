@@ -1,4 +1,4 @@
-# tese-msc-adhoc
+## tese-msc-adhoc
 
 Repositório destinado aos experimentos realizados na pesquisa da tese de mestrado sem redes sem fio AD Hoc
 
@@ -155,12 +155,29 @@ e insira:
 
 ## O mais importatnmte... hehe
 
-rode o arquio batman-adv
+rode o arquio batman-adv.sh
 
 ```
 sudo ~/start-batman-adv.sh
 
 ```
+## Comandos importantes
+
+A interface "bat0" pode ser usada como qualquer outra interface regular. 
+Esta por sua vez necessita de um endereço IP que pode ser configurado estaticamente 
+ou dinamicamente (usando DHCP ou serviços semelhantes): 
+
+No A: ip link set up dev bat0 
+No A : ip addr add 192.168.0.1/24 dev bat0 
+
+No B: ip link configurar dev bat0
+No B: ip addr add 192.168.0.2/24 dev bat0 
+No B: ping 192.168.0.1 
+
+Nota: Para evitar problemas, remova todos os endereços IP anteriormente 
+atribuídos às interfaces agora usadas pelo batman, por exemplo, 
+
+sudo ip addr flush dev wlan0
 
 
-3-configuração de gateway
+# Terceira etapa -configuração de gateway
