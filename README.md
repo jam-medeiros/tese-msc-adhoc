@@ -2,7 +2,7 @@
 
 Repositório destinado aos experimentos realizados na pesquisa da tese de mestrado sem redes sem fio AD Hoc
 
-tutorial rapido crição rede MESH com batman 1 criação rede mesh
+tutorial rapido crição rede MESH com batman
 
 Para criar uma rede mesh usando o protocolo de camada 2 batman.
 
