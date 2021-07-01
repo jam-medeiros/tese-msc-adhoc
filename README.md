@@ -12,31 +12,40 @@ Neste tutorial são usados nós raspberry para simulação e construção da red
 
 configurção padrão da malha
 
-# 1° Atualize o nó
+## Primeira Etapa  (Criando a rede MESH com batman)
 
-sudo apt-get update && sudo apt-get upgrade -y
+#### 1° Atualize o nó
 
-# 2º Reinicie o Raspberry Pi com o comando
+````sudo apt-get update && sudo apt-get upgrade -y````
 
-sudo reboot -n
+#### 2º Reinicie o Raspberry Pi com o comando
+
+```sudo reboot -n```
 
 Depois que o Pi para reinicializado, vá para a linha de comando conecte via ssh é:
 
-ssh pi@hostname.local
+```ssh pi@hostname.local```
 
-# 3º Executar comando para gerenciar uma rede mesh, um usuário chamado batctl precisa ser instalado. Isso pode ser feito usando o comando:
+#### 3º Executar comando para gerenciar uma rede mesh..
 
-sudo apt-get install libnl-genl-3-dev
-sudo apt install -y git
-sudo git clone https://github.com/open-mesh-mirror/batctl
-cd batctl
-sudo make install
 
-# Crie um arquivo ~ / start-batman-adv.sh
+um usuário chamado batctl precisa ser instalado. Isso pode ser feito usando o comando:
+
+```sudo apt-get install libnl-genl-3-dev```
+
+```sudo apt install -y git```
+
+```sudo git clone https://github.com/open-mesh-mirror/batctl```
+
+```cd batctl```
+
+```sudo make instal```
+
+#### Crie um arquivo ~ / start-batman-adv.sh
 
 por exemplo
 
-nano ~ / start-batman-adv.sh nano ~ / start-batman-adv.sh o arquivo deve conter o seguinte:
+sudo nano ~ / start-batman-adv.sh nano ~ / start-batman-adv.sh o arquivo deve conter o seguinte:
 
 #! / bin / bash
 
