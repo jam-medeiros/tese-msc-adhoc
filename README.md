@@ -121,7 +121,7 @@ OBS ::: Esses valores devem ser os mesmos em TODOS os dispositivos que formarão
 #### 7º certifique-se de que o módulo do kernel batman-adv seja carregado no momento da inicialização, emitindo o seguinte comando:
 
 ```
-echo 'batman-adv' | sudo tee --append / etc / modules
+echo 'batman-adv' | sudo tee --append /etc/modules
 
 ```
 
