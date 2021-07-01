@@ -55,7 +55,9 @@ sudo git clone https://github.com/open-mesh-mirror/batctl
 cd batctl
 ```
 
-```sudo make instal
+```
+sudo make install
+
 ```
 
 #### Crie um arquivo ~ / start-batman-adv.sh
