@@ -16,17 +16,21 @@ configurção padrão da malha
 
 #### 1° Atualize o nó
 
-````sudo apt-get update && sudo apt-get upgrade -y
-````
+```
+sudo apt-get update && sudo apt-get upgrade -y
+```
 
 #### 2º Reinicie o Raspberry Pi com o comando
 
-```sudo reboot -n
+```
+sudo reboot -n
+
 ```
 
 Depois que o Pi para reinicializado, vá para a linha de comando conecte via ssh é:
 
-```ssh pi@hostname.local
+```
+ssh pi@hostname.local
 ```
 
 #### 3º Instalando ..
@@ -87,32 +91,55 @@ chmod + x ~ / start-batman-adv.sh
 
 #### 6º Crie a definição da interface de rede para uma interface wlan0 criando um arquivo como usuário root, por exemplo
 
-sudo vi /etc/network/interfaces.d/wlan0 sudo nano /etc/network/interfaces.d/wlan0 em seguida, acesso ao conteúdo a seguir:
+```
+sudo vi /etc/network/interfaces.d/wlan0
 
-auto wlan0 iface wlan0 inet manual wireless-channel 1 wireless-essid nome-rede-mesh modo wireless ad-hoc
+```
+
+```
+sudo nano /etc/network/interfaces.d/wlan0
+
+```
+
+em seguida, acesso ao conteúdo a seguir:
+
+```
+auto wlan0
+iface wlan0 inet manual
+    wireless-channel 1
+    wireless-essid call-code-mesh
+    wireless-mode ad-hoc
+```
+
 
 OBS ::: Esses valores devem ser os mesmos em TODOS os dispositivos que formarão sua rede mesh.
 
 
 #### 7º certifique-se de que o módulo do kernel batman-adv seja carregado no momento da inicialização, emitindo o seguinte comando:
 
-```echo 'batman-adv' | sudo tee --append / etc / modules
+```
+echo 'batman-adv' | sudo tee --append / etc / modules
+
 ```
 
 #### 8º Impeça o processo DHCP de tentar gerenciar uma interface LAN sem fio, emitindo o seguinte comando:
 
-```echo 'denyinterfaces wlan0' | sudo tee --append /etc/dhcpcd.conf
+```
+echo 'denyinterfaces wlan0' | sudo tee --append /etc/dhcpcd.conf
+
 ```
 
 #### 9º Certifique-se de que o script de inicialização seja chamado editando o arquivo /etc/rc.local como usuário root, por exemplo
 
-```sudo nano /etc/rc.local
+```
+sudo nano /etc/rc.local
 ```
 
 e insira:
 
+```
 /home/pi/start-batman-adv.sh & antes da última linha: saída 0
-
+```
 
 
 
