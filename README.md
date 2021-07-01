@@ -39,6 +39,12 @@ ssh pi@hostname.local
 um usuário chamado batctl precisa ser instalado. Isso pode ser feito usando o comando:
 
 ```
+sudo apt-get install -y batctl
+
+```
+
+
+```
 sudo apt-get install libnl-genl-3-dev
 ```
 
@@ -138,6 +144,7 @@ echo 'denyinterfaces wlan0' | sudo tee --append /etc/dhcpcd.conf
 
 ```
 sudo nano /etc/rc.local
+
 ```
 
 e insira:
@@ -146,6 +153,14 @@ e insira:
 /home/pi/start-batman-adv.sh & antes da última linha: saída 0
 ```
 
+## O mais importatnmte... hehe
+
+rode o arquio batman-adv
+
+```
+sudo ~/start-batman-adv.sh
+
+```
 
 
 3-configuração de gateway
