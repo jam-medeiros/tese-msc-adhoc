@@ -107,7 +107,7 @@ em seguida, acesso ao conteúdo a seguir:
 auto wlan0
 iface wlan0 inet manual
     wireless-channel 1
-    wireless-essid call-code-mesh
+    wireless-essid nome-sua-rede-mesh
     wireless-mode ad-hoc
 ```
 
