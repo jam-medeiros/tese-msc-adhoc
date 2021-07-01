@@ -62,7 +62,10 @@ cd batctl
 
 por exemplo
 
-```sudo nano ~ / start-batman-adv.sh``` 
+```
+nano ~/start-batman-adv.sh
+
+``` 
 
 O arquivo deve conter o seguinte:
 
