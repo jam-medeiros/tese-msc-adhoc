@@ -168,10 +168,14 @@ Esta por sua vez necessita de um endereço IP que pode ser configurado estaticam
 ou dinamicamente (usando DHCP ou serviços semelhantes): 
 
 No A: ip link set up dev bat0 
+
 No A : ip addr add 192.168.0.1/24 dev bat0 
 
+
 No B: ip link configurar dev bat0
+
 No B: ip addr add 192.168.0.2/24 dev bat0 
+
 No B: ping 192.168.0.1 
 
 Nota: Para evitar problemas, remova todos os endereços IP anteriormente 
