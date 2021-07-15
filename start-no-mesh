@@ -1,0 +1,18 @@
+# Ativar o batman-adv
+sudo modprobe batman-adv
+# Disabilitando as coinfigs da placa wifi wlan0
+sudo ip link set wlan0 down
+sudo ifconfig wlan0 mtu 1532
+sudo iwconfig wlan0 mode ad-hoc
+sudo iwconfig wlan0 essid nome-da-rede
+sudo iwconfig wlan0 ap any
+sudo iwconfig wlan0 channel 5
+sleep 1s
+sudo ip link set wlan0 up
+sleep 1s
+sudo batctl if add wlan0
+sleep 1s
+sudo ifconfig bat0 up
+sleep 5s
+# setando IPv4 na mão
+sudo ifconfig bat0 192.168.100.10/24
