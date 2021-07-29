@@ -1,5 +1,5 @@
 #!/bin/sh -e
-# compilando e instalando o batman-adv, batctl, alfred and batman
+# compilando e instalando o batman-adv, batctl, alfred e batman
 # criando arquivo: 'nano batmaninstall' e copie esse texto
 # rodar o danado: 'sh ./batmaninstall'
 # reboot deposi de instalar 
@@ -24,7 +24,7 @@ cd batctl-2018.1/
 sudo make
 sudo make install
 
-# instalando alfred e batman-vis
+# instalando alfred e batman
 cd /home/pi
 wget https://downloads.open-mesh.org/batman/stable/sources/alfred/alfred-2018.1.tar.gz
 tar -xzvf alfred-2018.1.tar.gz
