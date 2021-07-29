@@ -1,0 +1,9 @@
+## tese-msc-adhoc
+
+
+    #### 1-install batman-adv  Rodar o script rede-batman
+    #### 2-Configurar wla0/bat0 interface
+    #### 3-Setup Adhoc network
+    #### 4-Add wlan0 to batman-adv 
+    #### 5-Up wlan0, bat0
+    #### 6-negociação de IP's  Rodar o script node-init
