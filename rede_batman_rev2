@@ -1,0 +1,44 @@
+#!/bin/sh -e
+# compilando e instalando o batman-adv, batctl, alfred and batman
+# criando arquivo: 'nano batmaninstall' e copie esse texto
+# rodar o danado: 'sh ./batmaninstall'
+# reboot deposi de instalar 
+
+sudo apt-get update
+sudo apt-get install git raspberrypi-kernel-headers build-essential dkms -y
+sudo apt install -y libcap-dev libgps-dev
+
+# install batman-adv
+cd /home/pi
+wget https://downloads.open-mesh.org/batman/stable/sources/batman-adv/batman-adv-2018.1.tar.gz
+tar -xzvf batman-adv-2018.1.tar.gz
+cd batman-adv-2018.1
+sudo make
+sudo make install
+
+# install batctl
+cd /home/pi
+wget https://downloads.open-mesh.org/batman/stable/sources/batctl/batctl-2018.1.tar.gz
+tar -xzvf batctl-2018.1.tar.gz
+cd batctl-2018.1/
+sudo make
+sudo make install
+
+# instalando alfred e batman-vis
+cd /home/pi
+wget https://downloads.open-mesh.org/batman/stable/sources/alfred/alfred-2018.1.tar.gz
+tar -xzvf alfred-2018.1.tar.gz
+cd alfred-2018.1
+sudo make
+sudo make install
+
+# removendo os  downloads
+cd /home/pi
+sudo rm -R batctl-2018.1
+sudo rm -R batman-adv-2018.1
+sudo rm -R alfred-2018.1
+rm batctl-2018.1.tar.gz
+rm batman-adv-2018.1.tar.gz
+rm alfred-2018.1.tar.gz
+
+exit 0
