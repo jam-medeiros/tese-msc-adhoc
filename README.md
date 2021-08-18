@@ -96,7 +96,8 @@ sudo ifconfig bat0 up
 #### 5° Torne o arquivo start-batman-adv.sh executável com o comando:
 
 ```
-chmod + x ~ / start-batman-adv.sh
+chmod +x ~/start-batman-adv.sh
+
 ```
 
 
