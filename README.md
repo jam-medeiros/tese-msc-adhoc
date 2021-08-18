@@ -148,10 +148,10 @@ sudo nano /etc/rc.local
 
 ```
 
-e insira:
+e insira: antes da última linha: saída 0
 
 ```
-/home/pi/start-batman-adv.sh & antes da última linha: saída 0
+/home/pi/start-batman-adv.sh & 
 ```
 
 ## O mais importatnmte... hehe
