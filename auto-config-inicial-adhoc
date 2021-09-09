@@ -6,8 +6,9 @@ createAdHocNetwork(){
     echo "Criando sua rede AD Hoc...."
     ifconfig wlan0 down
     iwconfig wlan0 mode ad-hoc
-    iwconfig wlan0 essid ad-jam
+    iwconfig wlan0 essid adhoc-jam
     ifconfig wlan0 11.0.0.1 netmask 255.255.255.0 up
+    sudo ifconfig bat0 192.168.10.1 netmask 255.255.255.0
     echo " Rede Ad Hoc criada com sucesso...."
 }
 
@@ -34,9 +35,9 @@ echo "Status"
 echo $PINGSTATUS
 if [ $PINGSTATUS -eq 0 ];
     then
-        echo "Connected ao WiFi"
+        echo "Connectado ao WiFi com sucesso, \n acesse sua rede adhoc"
     else
-        echo "Wifi não conectado, retrone para a rede ad-hoc"
+        echo "Wifi não conectado, retorne para a rede ad-hoc"
         createAdHocNetwork
 fi
 
