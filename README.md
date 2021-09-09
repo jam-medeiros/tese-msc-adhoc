@@ -185,4 +185,4 @@ atribuídos às interfaces agora usadas pelo batman, por exemplo,
 sudo ip addr flush dev wlan0
 
 
-# Terceira etapa -- Endereçamento do nó
+# Terceira etapa -- crição automática da rede
