@@ -116,11 +116,18 @@ sudo nano /etc/network/interfaces.d/wlan0
 em seguida, acesso ao conteúdo a seguir:
 
 ```
+auto lo
+iface lo inet loopback
+
+iface eth0 inet dhcp
+
 auto wlan0
-iface wlan0 inet manual
-    wireless-channel 1
-    wireless-essid nome-sua-rede-mesh
-    wireless-mode ad-hoc
+iface wlan0 inet static
+  address 10.2.1.1
+  netmask 255.255.255.0
+  wireless-channel 1
+  wireless-essid jam-adhoc
+  wireless-mode ad-hoc
 ```
 
 
